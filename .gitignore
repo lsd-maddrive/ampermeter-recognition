@@ -131,3 +131,5 @@ dmypy.json
 /venv[0-9]*
 *.html
 .vscode
+
+/data
