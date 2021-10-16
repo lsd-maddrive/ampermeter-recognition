@@ -15,7 +15,7 @@ poetry-remove:
 	curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | $(PYTHON) - --uninstall
 
 # Prepare project when you first time load it
-prepare-project:
+init-project:
 	poetry install
 	poetry run pre-commit install
 	poetry run nbdime config-git --enable

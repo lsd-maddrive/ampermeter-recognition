@@ -1,9 +1,7 @@
-from os import stat
 from typing import Union
 import cv2
 import math as m
 import numpy as np
-from numpy.lib.type_check import imag
 
 
 def toGray(img):
@@ -101,8 +99,8 @@ class ArrowDetector:
 
         if len(lines) > 0:
             angle_values = np.array(lines)[:, 0, 1]
-            angle_rad = np.mean(angle_values)
-            angle_rad_std = np.std(angle_values)
+            np.mean(angle_values)
+            np.std(angle_values)
 
         return lines, angle_values
 

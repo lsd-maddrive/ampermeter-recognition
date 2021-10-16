@@ -14,8 +14,12 @@ def get_args():
 
     parser = argparse.ArgumentParser(description="Process video file")
     parser.add_argument("-c", "--config", required=True, help="path to config file")
-    parser.add_argument("-i", "--input", required=True, help="path to video file to process")
-    parser.add_argument("-o", "--output", required=True, help="path to result video file")
+    parser.add_argument(
+        "-i", "--input", required=True, help="path to video file to process"
+    )
+    parser.add_argument(
+        "-o", "--output", required=True, help="path to result video file"
+    )
 
     args = parser.parse_args()
     return args
@@ -63,7 +67,10 @@ def main():
 
     # Processing part
     video_writer = cv2.VideoWriter(
-        output_path, fourcc=cv2.VideoWriter_fourcc(*"MJPG"), fps=reader.fps, frameSize=reader.size
+        output_path,
+        fourcc=cv2.VideoWriter_fourcc(*"MJPG"),
+        fps=reader.fps,
+        frameSize=reader.size,
     )
     reader.move_2_frame(0)
 
