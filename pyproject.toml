@@ -5,9 +5,10 @@ description = ""
 authors = ["DepartmentNotebookUser <dep-nb-user@mail.ru>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8, <3.10"
 opencv-python = "^4.5.3"
 PyYAML = "^5.4.1"
+scipy = "^1.7.1"
 
 [tool.poetry.dev-dependencies]
 ipykernel = "^6.2.0"

@@ -280,6 +280,13 @@ def filter_lines(img, lines, rate=1.0 / 8):
     return result
 
 
+def equalizeHist(img):
+    img_yuv = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
+    img_yuv[:, :, 0] = cv2.equalizeHist(img_yuv[:, :, 0])
+    img_output = cv2.cvtColor(img_yuv, cv2.COLOR_YUV2RGB)
+    return img_output
+
+
 def drawLines(img, lines):
     canvas = img.copy()
     for line in lines:
