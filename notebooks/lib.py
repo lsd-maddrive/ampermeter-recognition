@@ -247,6 +247,20 @@ def find_largest_contour(img):
     return bbox_xywh
 
 
+def adaptiveThreshold(img, filter_sz=3, block_sz=199, constant=5):
+    img = toGray(img)
+
+    if filter_sz > 0:
+        blur = cv2.GaussianBlur(img, (filter_sz, filter_sz), 0)
+    else:
+        blur = img
+
+    th = cv2.adaptiveThreshold(
+        blur, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, block_sz, constant
+    )
+    return th
+
+
 def binarizeOtsu(img, filter_sz=3):
     img = toGray(img)
 
