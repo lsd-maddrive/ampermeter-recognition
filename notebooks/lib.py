@@ -4,6 +4,17 @@ import math as m
 import numpy as np
 
 
+def read_image_rgb(fpath: str) -> np.array:
+    img = cv2.imread(fpath)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    return img
+
+
+def write_image_rgb(fpath: str, img: np.array):
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    cv2.imwrite(fpath, img)
+
+
 def toGray(img):
     if len(img.shape) > 2 and img.shape[2] > 1:
         img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
@@ -301,7 +312,15 @@ def equalizeHist(img):
     return img_output
 
 
-def drawLines(img, lines):
+def equalizeAdaptiveHist(img, grid_side=10):
+    img_yuv = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(grid_side, grid_side))
+    img_yuv[:, :, 0] = clahe.apply(img_yuv[:, :, 0])
+    img = cv2.cvtColor(img_yuv, cv2.COLOR_YUV2RGB)
+    return img
+
+
+def drawLines(img, lines, color=(0, 200, 0), thickness=3):
     canvas = img.copy()
     for line in lines:
 
@@ -319,6 +338,6 @@ def drawLines(img, lines):
 
         # print((rho, theta), (x0, y0), pt1, pt2)
 
-        cv2.line(canvas, pt1, pt2, (0, 0, 255), 3, cv2.LINE_AA)
+        cv2.line(canvas, pt1, pt2, color, thickness, cv2.LINE_AA)
 
     return canvas
